@@ -2,8 +2,9 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn.metrics import accuracy_score,confusion_matrix
 from sklearn.model_selection import KFold
+import matplotlib.pyplot as plt
 
-from ml2 import Model1
+from ml2 import Model1,Model, Model2
 
 #given a list of file names, organize the data in a list
 def organize_data(filenames):
@@ -39,18 +40,36 @@ def evaluate_model(inputs, outputs, model, n_folds):
         scores.append(accuracy)
     return scores
 
+def graph():
+    m = evaluate_model(X, y, Model(), 10)
+    m1 = evaluate_model(X, y, Model1(), 10)
+    m2 = evaluate_model(X, y, Model2(), 10)
+    x = np.arange(0,20)
+    plt.plot(x, m, label = "model")
+    plt.plot(x, m1, label = "model1")
+    plt.plot(x, m2, label = "model2")
+    
+    plt.xlabel('scores')
+    plt.ylabel('x')
+    
+    plt.legend("Model")
+    
+    plt.legend()
+    
+    plt.show()
+
 if __name__ == '__main__':
-    '''base_directory = "C:\\Users\\tonny\\Desktop\\project stuff\\IA-master\\ClassificacaoComentariosComNaiveBayes\\Datasets\\"
-    file1 = base_directory + "imdb_labelled.txt"
-    file2 = base_directory + "amazon_cells_labelled.txt"
-    file3 = base_directory + "yelp_labelled.txt"'''
-    base_directory = 'C:\\Users\\tonny\\Desktop\\project stuff\\'
+    base_directory = 'C:\\Users\\tonny\\Desktop\\project\\swahili-sentiment-analysis\\'
     file1 = base_directory + "positive.txt"
     file2 = base_directory + "negative.txt"
+    file3 = base_directory + "positive1.txt"
+    file4 = base_directory + "negative1.txt"
+    file5 = base_directory + "positive2.txt"
+    file6 = base_directory + "negative2.txt"
     #file3 = base_directory + "yelp_labelled.txt"
     files = [file1, file2]
-    data1 = load_data(file1, polarity =  1)
-    data2 = load_data(file2, polarity =  0)
+    data1 = load_data(file1, polarity =  1) + load_data(file3, polarity =  1) + load_data(file5, polarity =  1)
+    data2 = load_data(file2, polarity =  0) + load_data(file4, polarity =  0) + load_data(file6, polarity =  0)
     data = np.vstack((data1, data2 ))
     #specify the data
     X = data[:,0]

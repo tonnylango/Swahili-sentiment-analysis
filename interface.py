@@ -48,6 +48,7 @@ class Interface (Frame):
         self.rowconfigure(3, weight = 1)
 
         self.info = Pmw.ScrolledText(self, text_width = 25, text_height = 3)
+        self.info.insert(INSERT, "Sentences:\nPositives:\nNegatives:\n")
         self.info.configure(text_state = DISABLED)
         self.info.grid(row = 4, columnspan = 6, sticky = W + E, padx = 5, pady = 5)
 

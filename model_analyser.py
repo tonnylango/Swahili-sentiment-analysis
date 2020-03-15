@@ -58,6 +58,10 @@ def graph():
     
     plt.show()
 
+from joblib import dump
+def save_model( model, filename):
+    dump(model, filename)
+
 if __name__ == '__main__':
     base_directory = 'C:\\Users\\tonny\\Desktop\\project\\swahili-sentiment-analysis\\'
     file1 = base_directory + "positive.txt"
